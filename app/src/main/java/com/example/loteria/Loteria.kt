@@ -13,7 +13,7 @@ class Loteria(este: MainActivity) :Thread() {
     var esteHilo = este
 
     private var baraja = Baraja
-    private var contador = 0
+    var contador = 0
     var pausa = true
     var ready = false
 
@@ -73,6 +73,12 @@ class Loteria(este: MainActivity) :Thread() {
         }
     }
 
+    fun primeraimagen(){
+        esteHilo.runOnUiThread {
+            esteHilo.binding.image.setImageResource(baraja[0].imagen)
+        }
+    }
+
     fun reproducir(pos:Int) = GlobalScope.launch {
         val contador = pos
         var mp = MediaPlayer.create(esteHilo, baraja[contador].audio)
@@ -80,7 +86,7 @@ class Loteria(este: MainActivity) :Thread() {
             esteHilo.runOnUiThread {
                 mp.start()
             }
-            delay(1000L)
+            delay(3000L)
             //mp.reset()
         } catch (e: IOException) {
             AlertDialog.Builder(esteHilo)

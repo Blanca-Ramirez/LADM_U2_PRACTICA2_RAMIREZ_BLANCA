@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 // The dialog is automatically dismissed when a dialog button is clicked.
                 .setPositiveButton("Terminar partida") { _, _ ->
                     iniciar()
+                    loteria.primeraimagen()
                 }
                 .setNegativeButton("Ver las cartas restantes") { _, _ ->
                     loteria.pausa = false
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         if(!loteria.ready){
             this.loteria.barajear()
+
             try {
                 loteria.start()
             }catch (e:Exception){
