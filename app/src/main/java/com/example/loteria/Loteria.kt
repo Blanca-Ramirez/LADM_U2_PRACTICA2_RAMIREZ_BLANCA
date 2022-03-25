@@ -44,7 +44,7 @@ class Loteria(este: MainActivity) :Thread() {
         if (contador <= 52) {
             esteHilo.runOnUiThread {
                 esteHilo.binding.image.setImageResource(baraja[contador].imagen)
-                System.out.println("${baraja[contador].name}+ contador: ${contador}")
+                //System.out.println("${baraja[contador].name}+ contador: ${contador}")
                 reproducir(contador)
                 esteHilo.binding.numCartas.text = (contador+1).toString() + "/54"
             }
@@ -75,11 +75,13 @@ class Loteria(este: MainActivity) :Thread() {
 
     fun reproducir(pos:Int) = GlobalScope.launch {
         val contador = pos
+        var mp = MediaPlayer.create(esteHilo, baraja[contador].audio)
         try {
-            val mp = MediaPlayer.create(esteHilo, baraja[contador].audio)
-            mp.start()
-            delay(3200L)
-            mp.reset()
+            esteHilo.runOnUiThread {
+                mp.start()
+            }
+            delay(1000L)
+            //mp.reset()
         } catch (e: IOException) {
             AlertDialog.Builder(esteHilo)
                 .setTitle("FALLO EN EL AUDIO")
