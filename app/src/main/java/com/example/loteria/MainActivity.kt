@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         this.setTitle("LOTERIA - BLANCA RAMIREZ")
 
         binding.iniciar.setOnClickListener{
+            this.loteria.barajear()
             iniciar()
         }
 
@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         if(!loteria.ready){
             this.loteria.barajear()
-
             try {
                 loteria.start()
             }catch (e:Exception){
